@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="mapper.com.hurex.web.event">
+
+<!-- 	<select id="getUserExist" resultType="int" parameterType="EventVO"> -->
+<!-- SELECT  -->
+<!-- 	COUNT(*)  -->
+<!-- FROM  -->
+<!-- 	user -->
+<!-- WHERE  -->
+<!-- 	name = #{name,jdbcType=VARCHAR} -->
+<!-- 		and  -->
+<!-- 	tel = #{tel,jdbcType=VARCHAR} -->
+<!-- 	</select> -->
+	
+	<insert id="setUserData" parameterType="EventVO">
+INSERT INTO
+	user
+VALUES(
+	#{name,jdbcType=VARCHAR},
+	#{tel,jdbcType=VARCHAR},
+	#{web,jdbcType=VARCHAR},
+	DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i')
+)
+	</insert>
+	<select id="getUserList" resultType="EventVO" parameterType="EventVO">
+SELECT 
+	u.name as name,
+	u.tel as tel,
+	date_format(u.date, '%Y-%m-%d %H:%i') as date
+FROM 
+	user u
+ORDER BY u.date asc
+	</select>
+	
+</mapper>
